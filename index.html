@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Viewport Menu POC</title>
+    <script src="../node_modules/vue/dist/vue.min.js"></script>
+    <script src="../dist/viewport-menu.min.js"></script>
+  </head>
+  <body>
+    <viewport-menu></viewport-menu>
+    <div id="viewport-control" class="container">
+      <h1>hola</h1>
+    </div>
+    <style>
+      .container {
+        background: green;
+        height: 100px;
+        margin-top: 5px;
+        width: 200px;
+        transform-origin: top left;
+        transition: width 0.3s ease, transform 0.3s ease;
+      }
+    </style>
+    <script>
+      document.addEventListener('viewport:change', ({ detail }) => {
+        const controlElement = document.getElementById('viewport-control')
+        controlElement.setAttribute('style', `transform: scale(${ detail.scale })`) 
+        controlElement.style.width = detail.width + 'px'
+      })
+    </script>
+  </body>
+</html>
